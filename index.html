@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ng-app='mw'>
+<head>
+<style type='text/css'>
+
+.object {
+  position:relative;
+  border:1px solid black;
+  margin:1em;
+  width:30em;
+}
+
+.object div.menu {
+  background-color:black;
+}
+
+.object span.type {
+  float:left;
+  color:white;
+  padding:.1em;
+  margin:.25em;
+}
+
+.object span.button  { 
+  float:right;
+  margin:.25em;
+  padding:.1em;
+  background-color:#ccc;
+  border-radius:.25em;
+  width:3em;
+  text-align:center;
+}
+
+.object br {
+  clear:both;
+}
+
+.object div.content {
+  margin:1em;
+  min-height:8em;
+}
+
+.object label { 
+  clear:right; 
+  display:block; 
+  text-align:right; 
+  width:100%;
+  padding:.25em;
+}
+
+.object input { 
+  width:20em; 
+  margin-left:1em; 
+  font:inherit;
+}
+
+.object input.editing {
+  background-color:#B0F4FE;
+}
+
+
+
+
+</style>
+</head>
+<body>
+<div ng-controller='ObjectList'>
+  <div ng-repeat='object in objects' ng-switch='object.type'>
+
+    <div ng-switch-when='Student'>
+      <mw-object object='object'>
+        <label>Student:<input mw-locking ng-model='object.name'/></label>
+        <label>Degree:<input mw-locking ng-model='object.degree'/></label>
+        <mw-attachments></mw-attachments>
+      </mw-object>
+    </div>
+
+    <div ng-switch-when='Report'>
+      <mw-object object='object'>
+        <label>Course:<input mw-locking ng-model='object.course'/></label>
+        <label>Grade:<input mw-locking ng-model='object.grade'/></label>
+      </mw-object>
+    </div>
+
+    <div ng-switch-when='Course'>
+      <mw-object object='object'>
+        <label>Name:<input mw-locking ng-model='object.name'/></label>
+        <label>Description:<input mw-locking ng-model='object.desc'/></label>
+        <mw-attachments></mw-attachments>
+      </mw-object>
+    </div>
+
+  </div>
+</div>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js'></script>
+<script src='client.js'></script>
+</body>
+</html>

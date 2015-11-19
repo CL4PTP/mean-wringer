@@ -1,0 +1,9 @@
+<div class='object'>
+	<div class='menu'>
+		<span class='type'>{{object.type}}</span>
+		<span ng-if='!editing' class='button' ng-click='edit()'>Edit</span>
+		<span ng-if='editing'  class='button' ng-click='save()'>Save</span>
+		<br/>
+	</div>
+	<div class='content' ng-transclude></div>
+</div>
