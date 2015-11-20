@@ -1,29 +1,22 @@
 The MEAN Wringer
 ================
 
-This package is a test.  I use it to evaluate everything from problem 
-comprehension to your coding skills and style using real-world 
-requirements in a real-world framework built on the MEAN stack (though 
-MongoDB is not used in this exercise).  In essence, I am __putting you
-through the wringer__; hence the name of the project.
+This package is intented as an evaluation tool.  It is used to evaluate 
+everything from problem comprehension to coding skills and style using 
+real-world requirements to be implemented using the MEAN stack (though 
+MongoDB is not used in this exercise).  In essence, the intent is to
+__put you through the wringer__; hence the name of the project.
 
 Instructions
 ------------
 
 1. Install Git & Node.
-2. Clone this repository:
-        > git clone https://github.com/fiveladdercon/mean-wringer.git`
-3. NPM install
-        > npm install
-        > npm list --depth=0
-         +- body-parser
-         +- express
-         +- multer`
-4. Start the server:
-        > node server.js
+2. Clone this repository: `> git clone https://github.com/fiveladdercon/mean-wringer.git`
+3. NPM install: `> npm install`
+4. Start the server: `> node server.js`
 5. Direct your browser to `localhost:3000`
 6. Read the rest of this README.md and complete the tasks.
-7. Submit a pull request when finished.
+7. Submit a <yourname> pull request when finished.
 
 
 Client Side Requirements
@@ -33,7 +26,7 @@ The application manages a collection of objects.  There are three classes
 of object (Student, Course, Classroom), each with several instances.
 
 The presentation and interaction with each object is made consistent through
-the use of the mwObject Angular transcluding directive, which gives all objects
+the use of the mwObject transcluding AngularJS directive, which gives all objects
 the same general look-and-feel.
 
 
@@ -55,7 +48,7 @@ be encapsulated in the mwLocking directive, which can be added to input tags:
 __[R2]__
 Students and Courses need to support one or more __attachments__, which are 
 arbitrary files related to these objects that have been uploaded to the server.
-(e.g. course materials can be __attached__ to any given course).  Note that
+(e.g. course materials can be attached to any given course).  Note that
 Classroom objects do not support attachments.
 
 To keep attachment management consistent, each object that supports attachments
@@ -89,8 +82,8 @@ Server Side Requirements
 ------------------------
 
 The server actually serves two things: a JSON REST API for managing server
-resources and HTML web-client for intiating JSON requests and displaying
-the responses.
+resources and HTML/AngularJS web-client for initiating JSON requests and 
+displaying the responses.
 
 __[R4]__
 Server side storage of attachments is to be abstracted from the client.
@@ -100,26 +93,25 @@ attaches a "syllabus.pdf" file to a Course object, the server will
 
 * store this as:
 
-    uploads/S0MeRaNDoMsTriNG0fCHaRacTERs.pdf
+    `uploads/S0MeRaNDoMsTriNG0fCHaRacTERs.pdf`
 
 * store a meta-data record of:
 
-    { 
-    	id         : 10, 
-    	objectId   : 1, 
-    	objectType : 'Course', 
-    	label      : 'syllabus.pdf'
-    	file       : 'S0MeRaNDoMsTriNG0fCHaRacTERs.pdf'
-    }
+    `{ 
+    	id      : 10, 
+      label   : 'syllabus.pdf'
+    	object  : 'Course/1', 
+    	file    : 'S0MeRaNDoMsTriNG0fCHaRacTERs.pdf'
+    }`
 
 * and present only the following meta-data to the client:
 
-    { 
+    `{ 
     	id         : 10, 
     	objectId   : 1, 
     	objectType : 'Course', 
-    	label      : 'syllabus.pdf'
-    }
+      label      : 'syllabus.pdf'
+    }`
 
 
 __[R5]__
@@ -130,8 +122,8 @@ Attachment support must provided through the following JSON REST API:
 Return a list of attachments for instance :i of object :type:
 
     [ 
-      {id:integer, objectId:':i', objectType:':type', label:'string'}, 
-      {id:integer, objectId:':i', objectType:':type', label:'string'},
+      {id:integer, objectId:<:i>, objectType:<:type>, label:'string'}, 
+      {id:integer, objectId:<:i>, objectType:<:type>, label:'string'},
       ... 
     ]
 
@@ -143,14 +135,14 @@ When the upload completes, either one attachment or a list of attachments are
 returned (depending on wheter one or many attachments where POSTed):
 
     [ 
-      {id:integer, objectId:':i', objectType:':type', label:'string'}, 
-      {id:integer, objectId:':i', objectType:':type', label:'string'},
+      {id:integer, objectId:<:i>, objectType:<:type>, label:'string'}, 
+      {id:integer, objectId:<:i>, objectType:<:type>, label:'string'},
       ... 
     ]
 
  -OR-
 
-    {id:integer, objectId:':i', objectType:':type', label:'string'}
+    {id:integer, objectId:<:i>, objectType:<:type>, label:'string'}
 
 #### PUT /api/attachment/:x ####
 
@@ -158,7 +150,7 @@ Update the label of the attachment.  THIS IS TO ONLY CHANGE THE LABEL PROPERTY,
 NOT THE FILE ON THE SERVER (SEE REQUIREMENT 4 ABOVE).  The updated object is
 to be returned in the response:
 
-    {id:integer, objectId:':i', objectType:':type', label:'string'}
+    {id:integer, objectId:<:i>, objectType:<:type>, label:'string'}
 
 #### GET /api/attachment/:x ####
 
@@ -173,17 +165,17 @@ Deletes attachment :x, including the actual file.
 Tasks
 -----
 
-__[T1]__ (Node.js) Implement the create/read/update/delete/find methods in memory.js.
+__[T1]__ (AngularJS) Implement the mwLocking directive in client.js __[R1]__.
 
-__[T2]__ (Node.js) Extend the Memory class in jsonfile.js to persist the struct list in a .json file __[R4]__.
+__[T2]__ (AngularJS) Implement the mwAttachments directive in client.js __[R2]__.
 
-__[T3]__ (Express) Implement the Attachments JSON API in server.js __[R5]__.
+__[T3]__ (AngularJS) Add Attachment drag-n-drop support to the mwObject directive in client.js __[R3]__.
 
-__[T4]__ (AngularJS) Implement the mwLocking directive in client.js __[R1]__.
+__[T4]__ (Node.js) Implement the create/read/update/delete/find methods in memory.js.
 
-__[T5]__ (AngularJS) Implement the mwAttachments directive in client.js __[R2]__.
+__[T5]__ (Node.js) Extend the Memory class in jsonfile.js to persist the struct list in a .json file __[R4]__.
 
-__[T6]__ (AngularJS) Add Attachment drag-n-drop support to the mwObject directive in client.js __[R3]__.
+__[T6]__ (Express) Implement the Attachments JSON API in server.js __[R5]__.
 
 
 Evaluation Criteria
