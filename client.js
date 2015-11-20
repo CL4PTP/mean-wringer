@@ -14,13 +14,13 @@
 
     function ObjectList($scope) {
     	$scope.objects = [
-    		{ id: 1, type: 'Student' , attachable:true , name  :'Jim'     , degree: 'BSc' },
-    		{ id: 1, type: 'Report'  , attachable:false, course:'Physics' , grade : 'A'   },
-    		{ id: 2, type: 'Report'  , attachable:false, course:'Math'    , grade : 'B+'  },
-    		{ id: 2, type: 'Student' , attachable:true , name  :'Sue'     , degree: 'BA'  },
-    		{ id: 3, type: 'Report'  , attachable:false, course:'English' , grade : 'C'   },
-    		{ id: 4, type: 'Report'  , attachable:false, course:'History' , grade : 'B-'  },
-    		{ id: 5, type: 'Course'  , attachable:true , name  :'MEAN'    , desc  : 'Using the MEAN stack for web applications.' }
+    		{ id: 1, type: 'Student'   , attachable:true , name  :'Jim'     , degree: 'BSc'    },
+    		{ id: 1, type: 'Course'    , attachable:true , name  :'MEAN'    , desc  : 'Using the MEAN stack for web applications.' },
+    		{ id: 3, type: 'Student'   , attachable:true , name  :'Frank'   , degree: 'BA'     },
+    		{ id: 2, type: 'Course'    , attachable:true , name  :'Physics' , desc  : 'Really hard math.' },
+    		{ id: 1, type: 'Classroom' , attachable:false, course:'MEAN'    , day   : 'Friday' },
+    		{ id: 2, type: 'Student'   , attachable:true , name  :'Sue'     , degree: 'BSc'    },
+    		{ id: 2, type: 'Classroom' , attachable:false, course:'Physics' , day   : 'Monday' }
     	];
     }
 
