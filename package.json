@@ -20,5 +20,16 @@
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "multer": "^1.1.0"
+  },
+
+  "jshintConfig": {
+    "globals": {
+      "exports": true,
+      "angular": false,
+      "require": false,
+      "module": false,
+      "console": false,
+      "process": false
+    }
   }
 }
