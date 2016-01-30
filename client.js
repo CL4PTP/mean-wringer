@@ -29,7 +29,6 @@
     // Provide a way to add attachments to the
     // object by dragging & dropping files into
     // the .object div.
-
     angular
         .module('mw')
         .directive('mwObject', mwObject);
@@ -63,14 +62,25 @@
 	//  o Removes the editing class & disabled the
 	//    element when object.editing is false
     //
-
     angular
         .module('mw')
         .directive('mwLocking', mwLocking);
 
     function mwLocking () {
         return {
-            restrict: 'A'
+            restrict: 'A',
+            link: function(scope, element, attr) {
+                scope.$watch('$parent.editing', function(isEditing) {
+                    if (isEditing) {
+                        element.addClass('editing');
+                        element.attr('disabled', false);
+                    }
+                    else {
+                        element.removeClass('editing');
+                        element.attr('disabled', true);
+                    }
+                });
+            }
         };
     }
 
@@ -89,7 +99,6 @@
 	//    more files but does not display a 
 	//    <input type='file'/> element
     //
-
     angular
         .module('mw')
         .directive('mwAttachments', mwAttachments);
