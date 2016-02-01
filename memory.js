@@ -11,6 +11,9 @@ function Memory () {
 // list structs is provided, otherwise a single struct is returned.
 // Input structs do not have id properties.
 //
+// NOTE: Due to callbacks, the function is not very composable
+// TODO: Find a way to make the function more composable despite callbacks,
+//       or switch to a promise based structure
 Memory.prototype.create = function (structs, callback) /* callback(error, structs) */ {
 	if (structs.constructor == Array) {
 		var processed_structs = [];
@@ -35,6 +38,8 @@ Memory.prototype.create = function (structs, callback) /* callback(error, struct
 		callback(null, processed_structs);
 	}
 	else {
+		// Sanity checks to catch wayward use of the API at the storage level
+		// TODO: Set up better validation; decide whether it should be here at all
 		if (typeof structs.id !== "undefined")
 			return callback(new Error("Struct ID must NOT be set"), null);
 
