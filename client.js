@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('mw', [ngResource]);
+		.module('mw', ['ngResource']);
 
 	//////////// ObjectList ////////////
 
