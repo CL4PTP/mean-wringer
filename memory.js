@@ -15,7 +15,7 @@ function Memory () {
 // TODO: Find a way to make the function more composable despite callbacks,
 //       or switch to a promise based structure
 Memory.prototype.create = function (structs, callback) /* callback(error, structs) */ {
-	if (structs.constructor == Array) {
+	if (structs.constructor === Array) {
 		var processed_structs = [];
 
 		var wrap_single_callback = function(_err, _stru) {
@@ -27,10 +27,10 @@ Memory.prototype.create = function (structs, callback) /* callback(error, struct
 			processed_structs.push(_stru);
 		};
 
-		for (var struct in structs) {
+		for (var i = 0; i < structs.length; i++) {
 			var erred = false;
 
-			Memory.create(struct, wrap_single_callback);
+			this.create(structs[i], wrap_single_callback);
 
 			if (erred) return null;
 		}
@@ -43,8 +43,8 @@ Memory.prototype.create = function (structs, callback) /* callback(error, struct
 		if (typeof structs.id !== "undefined")
 			return callback(new Error("Struct ID must NOT be set"), null);
 
-		this.id += 1;
 		structs.id = this.id;
+		this.id += 1;
 		this.store[structs.id] = structs;
 
 		callback(null, structs);
